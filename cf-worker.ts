@@ -1,4 +1,5 @@
 import { app } from './src/app.ts'
+
 // 添加根路由以实现美化仪表盘
 app.get('/', (c) => {
   return c.html(`
@@ -42,12 +43,9 @@ app.get('/', (c) => {
             const response = await fetch(endpoint);
             if (!response.ok) throw new Error('API请求失败');
             const data = await response.json();
-            document.getElementById('result').innerHTML = `
-              <h2>${endpoint} 的结果</h2>
-              <pre>${JSON.stringify(data, null, 2)}</pre>
-            `;
+            document.getElementById('result').innerHTML = '<h2>' + endpoint + ' 的结果</h2><pre>' + JSON.stringify(data, null, 2) + '</pre>';
           } catch (error) {
-            document.getElementById('result').innerHTML = `<p style="color: red;">错误: ${error.message}</p>`;
+            document.getElementById('result').innerHTML = '<p style="color: red;">错误: ' + error.message + '</p>';
           }
         }
       </script>
@@ -55,4 +53,5 @@ app.get('/', (c) => {
     </html>
   `);
 });
+
 export default { fetch: app.fetch }
